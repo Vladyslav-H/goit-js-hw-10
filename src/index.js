@@ -18,17 +18,15 @@ function onInputName(event) {
     countryInfoEl.innerHTML = '';
     return;
   }
-
-  fetchCountries(countryName).then(checkArrayLength).catch(fail);
+  fetchCountries(countryName).then(checkQuantityOfCountries).catch(fail);
 }
 
-function checkArrayLength(array) {
+function checkQuantityOfCountries(array) {
   if (array.length > 10) {
     Notify.info('Too many matches found. Please enter a more specific name.');
   } else if (array.length >= 2 && array.length <= 10) {
     countryInfoEl.innerHTML = '';
-
-    createCountryList(array);
+    createCountriesList(array);
   } else if (array.length === 1) {
     countryListEl.innerHTML = '';
     createCountryCard(array);
@@ -48,26 +46,26 @@ function createCountryCard(array) {
                   languages
                 )}</li>
                 </ul>`;
-  addCardToHTML(coutryCard);
+  addCountryCardToHTML(coutryCard);
 }
 
-function createCountryList(array) {
+function createCountriesList(array) {
   let countryList = '';
   for (let { flags, name } of array) {
     countryList += `<li class='country-list-item'><img src='${flags.svg}' 
         alt='flag of ${name.official}'width ='30' height ='20'/><p> ${name.official}</p></li>`;
   }
-  addListToHTML(countryList);
+  addCountriesListToHTML(countryList);
 }
 
-function addCardToHTML(element) {
+function addCountryCardToHTML(element) {
   countryInfoEl.innerHTML = element;
 }
-function addListToHTML(element) {
+function addCountriesListToHTML(element) {
   countryListEl.innerHTML = element;
 }
 function fail() {
-     countryListEl.innerHTML = '';
-    countryInfoEl.innerHTML = '';
+  countryListEl.innerHTML = '';
+  countryInfoEl.innerHTML = '';
   Notify.failure('Oops, there is no country with that name');
 }
