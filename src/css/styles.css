@@ -21,26 +21,25 @@ body {
   margin-left: 40px;
   border-radius: 10px;
 }
-.nolist{
+.nolist {
   list-style: none;
 }
-.country-info-item > span{
+.country-info-item > span {
   font-weight: bold;
 }
-.country-info-item  p {
+.country-info-item p {
   font-weight: bold;
   font-size: 30px;
   margin: 0;
-  
 }
 .country-list-item p {
- 
   font-size: 20px;
   margin: 0;
 }
 
-.country-info-item:first-child, .country-list-item{
+.country-info-item:first-child,
+.country-list-item {
   display: flex;
   align-items: center;
-gap: 10px;}
-  
+  gap: 10px;
+}

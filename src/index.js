@@ -36,7 +36,7 @@ function checkQuantityOfCountries(array) {
 function createCountryCard(array) {
   const countryObj = array[0];
   const { name, capital, population, flags, languages } = countryObj;
-  const coutryCard = `<ul class='country-info-list nolist'>
+  const coutryCard = `<ul class='country-info-card nolist'>
                 <li class='country-info-item'><img src ='${flags.svg}'
                  alt ='flag of ${name.official}' width ='40' height ='30'/>    
                 <p> ${name.official}</p></li>
