@@ -23,27 +23,24 @@ function onInputName(event) {
     return;
   }
 
-  fetchCountries(countryName).then(checkQuantityOfCountries).catch(fail);
+  fetchCountries(countryName).then(createCountryCardInfo).catch(fail);
 }
 
-function checkQuantityOfCountries(array) {
+function createCountryCardInfo(array) {
   if (array.length > 10) {
     Notify.info('Too many matches found. Please enter a more specific name.');
   } else if (array.length >= 2 && array.length <= 10) {
     countryInfoEl.innerHTML = '';
 
-    createCountriesList(array);
+    return (countryListEl.innerHTML = markupCountriesList(array));
   } else if (array.length === 1) {
     countryListEl.innerHTML = '';
 
-    createCountryCard(array);
+    return (countryInfoEl.innerHTML = markupCountryCard(...array));
   }
 }
 
-function createCountryCard(array) {
-  const countryObj = array[0];
-  const { name, capital, population, flags, languages } = countryObj;
-
+function markupCountryCard({ name, capital, population, flags, languages }) {
   const coutryCard = `<ul class='country-info-card nolist'>
                 <li class='country-info-item'><img src ='${flags.svg}'
                  alt ='flag of ${name.official}' width ='40' height ='30'/>    
@@ -54,11 +51,10 @@ function createCountryCard(array) {
                   languages
                 )}</li>
                 </ul>`;
-
-  addCountryCardToHTML(coutryCard);
+  return coutryCard;
 }
 
-function createCountriesList(array) {
+function markupCountriesList(array) {
   let countryList = '';
 
   array.map(
@@ -67,16 +63,7 @@ function createCountriesList(array) {
       <img src='${flags.svg}'alt='flag of ${name.official}'width ='30' height ='20'/>
         <p> ${name.official}</p></li>`)
   );
-
-  addCountriesListToHTML(countryList);
-}
-
-function addCountryCardToHTML(element) {
-  countryInfoEl.innerHTML = element;
-}
-
-function addCountriesListToHTML(element) {
-  countryListEl.innerHTML = element;
+  return countryList;
 }
 
 function fail() {
